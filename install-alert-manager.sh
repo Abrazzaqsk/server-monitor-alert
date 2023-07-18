@@ -7,7 +7,7 @@
 #sudo apt install -y wget
 
 # Download the latest version of Alertmanager
-wget https://github.com/prometheus/alertmanager/releases/latest/download/alertmanager-*.linux-amd64.tar.gz
+wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
 
 # Extract the downloaded package
 tar -xzf alertmanager-*.linux-amd64.tar.gz
