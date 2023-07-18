@@ -66,3 +66,5 @@ rm alertmanager-*.linux-amd64.tar.gz
 rm -rf alertmanager
 
 echo "Alertmanager has been installed and started successfully."
+
+sudo systemctl status alertmanager
