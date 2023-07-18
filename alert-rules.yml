@@ -1,0 +1,40 @@
+groups:
+  - name: Mumbai-Region-Ec2
+    rules:
+      - alert: NodeDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node {{ $labels.instance }} is down"
+          description: "The node {{ $labels.instance }} is not reachable or down."
+
+      - alert: HighCPULoad
+        expr: (100 - (avg by (instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)) >= 70
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU load on node {{ $labels.instance }}"
+          description: "The CPU load on node {{ $labels.instance }} is above 70%."
+
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) <= 0.70
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on node {{ $labels.instance }}"
+          description: "The memory usage on node {{ $labels.instance }} is above 70%."
+
+      - alert: HighDiskUsage
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) <= 0.4
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage on node {{ $labels.instance }}"
+          description: "The disk usage on node {{ $labels.instance }} is above 60%."
+
+
